@@ -87,12 +87,6 @@ form.addEventListener('submit', (e) => {
     input.value = '';
 });
 
-// // 서버로부터 채팅 메시지 수신
-// socket.on('chat message', ({ username, msg }) => {
-//     addMessage(username, msg);
-// });
-
-
 // 기존 리스너 제거 후 새로 등록
 socket.on('private message', ({ from, to, msg }) => {
     addMessage(from, msg, true, to);  // 귓속말 메시지 처리 시 수신자 정보도 전달
@@ -110,8 +104,6 @@ document.querySelectorAll('.namespace-button').forEach(button => {
 });
 
 function connectToNamespace(namespace) {
-    // if (socket) socket.disconnect(); // 기존 소켓 연결 해제
-    // currentNamespace = namespace;
 
     if (socket) {
         socket.off(); // 기존 리스너 제거
@@ -120,8 +112,6 @@ function connectToNamespace(namespace) {
 
     currentNamespace = namespace;
     clearMessages(); // 새로운 네임스페이스로 이동 시 메시지 초기화
-
-
 
     socket = io(namespace, {
         auth: { username: sessionStorage.getItem('username') || prompt('사용할 닉네임을 입력하세요:') },
@@ -139,20 +129,6 @@ function connectToNamespace(namespace) {
 
     console.log(`Connected to namespace: ${namespace}`);
 }
-
-// // 메시지 추가 함수 (기존 코드 유지)
-// function addMessage(name, msg, isWhisper = false, target = '') {
-//     const item = document.createElement('li');
-//     if (isWhisper) {
-//         item.textContent = `Whisper from ${name} to ${target}: ${msg}`;
-//         item.style.fontStyle = 'italic';
-//         item.style.color = 'gray';
-//     } else {
-//         item.textContent = `${name}: ${msg}`;
-//     }
-//     document.getElementById('messages').appendChild(item);
-//     window.scrollTo(0, document.body.scrollHeight);
-// }
 
 // 페이지 로드 시 기본 네임스페이스에 연결
 connectToNamespace(currentNamespace);

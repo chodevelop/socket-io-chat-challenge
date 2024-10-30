@@ -46,9 +46,6 @@ async function main() {
   const userSockets = new Map(); // username과 socket.id를 매핑
 
   const port = process.env.PORT || 3000;
-  // app.get('/', (req, res) => {
-  //   res.sendFile(join(__dirname, 'public', 'index.html'));
-  // });
 
   io.use((socket, next) => {
     const username = socket.handshake.auth.username;
@@ -57,88 +54,6 @@ async function main() {
     }
     next();
   });
-
-  // io.on('connection', async (socket) => {
-  //   const username = socket.handshake.auth.username;  // 소켓 인증 시 받은 username
-
-  //   if (!username) {
-  //     console.error(`Connection attempt without a username (ID: ${socket.id})`);
-  //     return;
-  //   }//연결 해제 시 사용자 이름이 null이 아닐 때만 로그를 남기도록 수정
-
-  //   userSockets.set(username, socket.id);  // username과 소켓 ID 매핑
-  //   console.log(`User connected: ${username} (ID: ${socket.id})`);
-
-  //   const offset = 0;
-  //   const limit = 50;
-
-  //   // try {
-  //   //   // 페이징 쿼리로 메시지 불러오기 (offset과 limit 사용)
-  //   //   const rows = await db.all(
-  //   //     'SELECT * FROM messages ORDER BY id ASC LIMIT ? OFFSET ?',
-  //   //     [limit, offset]
-  //   //   );
-  //   try {
-  //     // DB에서 메시지 복구 (네임스페이스 포함)
-  //     const rows = await db.all(
-  //       'SELECT * FROM messages WHERE namespace = ? ORDER BY id ASC LIMIT ? OFFSET ?',
-  //       [socket.nsp.name, limit, offset]
-  //     );
-
-  //     // 메시지 복구: 일반 메시지와 귓속말 구분 처리
-  //     rows.forEach((row) => {
-
-  //       const messageData = {
-  //         from: row.WhisperFrom,
-  //         username: row.username,  // 발신자 정보 불러오기. WhisperFrom 없으면 일반 메시지 보낸 username 사용
-  //         to: row.WhisperTo,                      // 수신자 정보 불러오기
-  //         msg: row.content,
-  //         offset: row.id,
-  //       };
-
-  //       // 일반 메시지 복구
-  //       if (!row.isWhisper) {
-  //         socket.emit('chat message', messageData);  // 모든 사용자에게 공개
-  //       } else if (row.WhisperTo === username || row.WhisperFrom === username) {
-  //         // 귓속말 메시지 복구 (자신이 발신자 또는 수신자인 경우만)
-  //         socket.emit('private message', messageData);  // 귓속말의 대상자 또는 발신자만 수신
-  //       }
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to load chat history:', error);
-  //   }
-
-  //   socket.on('private message', async function (targetUsername, msg, clientOffset, callback) {
-
-  //     try {
-  //       // const targetSocketId = userSockets.get(targetUsername);
-  //       const targetSocketId = Array.from(namespace.sockets.values()).find(
-  //         (s) => s.handshake.auth.username === targetUsername
-  //       )?.id;
-
-  //       if (targetSocketId) {
-  //         await db.run(
-  //           'INSERT INTO messages (username, content, socketId, client_offset, isWhisper, WhisperFrom, WhisperTo, namespace) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-  //           username, msg, socket.id, clientOffset, true, username, targetUsername, namespace.name
-  //         );
-  //         console.log(`Whisper from ${username} to ${targetUsername}: ${msg}`);
-  //         // 귓속말 메시지를 발신자와 수신자에게만 전송
-  //         // 발신자와 수신자에게만 귓속말 전송
-  //         socket.emit('private message', { from: username, to: targetUsername, msg, offset: result.lastID });  // 발신자에게 전송
-  //         io.to(targetSocketId).emit('private message', { from: username, to: targetUsername, msg, offset: result.lastID });  // 수신자에게 전송
-  //         callback();
-  //       }
-  //     } catch (e) {
-  //       console.error('Failed to save private message:', e);
-  //       if (e.errno === 19) callback(); // 중복 메시지 처리
-  //     }
-  //   });
-
-  //   socket.on('disconnect', () => {
-  //     console.log(`User disconnected: ${username} (ID: ${socket.id})`);
-  //     userSockets.delete(username); // 소켓 해제 시 매핑 제거
-  //   });
-  // });
 
   // 기존 코드는 수정하지 않고, 새로운 네임스페이스 추가 (아래 코드만 추가됨)
   const devNamespace = io.of('/dev'); // 개발 네임스페이스
@@ -215,14 +130,9 @@ async function main() {
             io.to(targetSocketId).emit('private message', { from: username, to: targetUsername, msg, offset: result.lastID });  // 수신자에게 전송
             // callback();
           }
-        } 
-        catch (error) {
+        } catch (error) {
           console.error(`Failed to save message in ${namespace.name}:`, error);
         }
-        // catch (e) {
-        //   console.error('Failed to save private message:', e);
-        //   if (e.errno === 19) callback(); // 중복 메시지 처리
-        // }
       });
       // 클라이언트가 연결 해제될 때 로그 출력
       socket.on('disconnect', () => {
