@@ -11,19 +11,18 @@
    
 ## 목표
 ### 완료된 목표
-- Socket.io 연동
-- Node.js 연동
-- express 연동
-- sqlite3 기반으로 채팅 데이터 영속성 유지(라이트한 db라 일단은 이걸 채택)
-- sessionStorage를 통한 사용자 닉네임 구분(username 텍스트 기반)
-- whisper(namespace 단위로 구분되는 귓속말)
-- namespace
+- Socket.io 연동 (2024.10.30)
+- Node.js 연동 (2024.10.30)
+- express 연동 (2024.10.30)
+- sqlite3 기반으로 채팅 데이터 영속성 유지 (2024.10.30)
+- sessionStorage를 통한 사용자 닉네임 구분(username 텍스트 기반) (2024.10.30)
+- whisper(namespace 단위로 구분되는 귓속말) (2024.10.30)
+- namespace (2024.10.30)
 
 ## 미완료된 목표(단기 목표)
 - 단톡방(room) 구현
-- 파일 전송 및 업로드 미리보기(multer)
+- 파일 전송 / 업로드 / 미리보기(multer)
 - JWT 기반 인증 처리(로그인)
-- 파일 전송(Multer)
 - sqlite3 기반으로 유저 데이터 영속성 유지(로그인 구현 이후)
 - 실시간 알림 기능
 - DM(1:1 채팅)
