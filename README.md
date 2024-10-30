@@ -3,6 +3,11 @@
 ## 개요
 `socket.io`, `JWT Login`, `multer` 등 node.js의 핵심적인 응용 기능을 전부 사용할 수 있는 프로젝트입니다.
 
+## 기술 스택
+- FE: HTML5 + CSS + JavaScript *(vanila)*
+- BE: Node.js + Express + JavaScript
+- DB: SQLite3
+
 ## 프로젝트 완수 시 얻는 것
  - `socket.io`, `JWT Login`, `multer`의 자유로운 응용
  - 기능 구현에 있어 단계적인 접근법 터득 및 문제 해결 능력 함양
