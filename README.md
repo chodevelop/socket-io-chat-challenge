@@ -9,11 +9,14 @@
 - DB: SQLite3
 
 ## 사용법
-- 상단 버튼을 누르면 namespace 이동
+- 상단 버튼을 누르면 `namespace` 간 이동
+  - 개인 스페이스는 현재 `개발`, `잡담`, `정보` 이렇게 3개로 분리되어 있음
+
+ 
 - 채팅창에 `/dm {username} {message}`형식으로 입력하면 특정 유저에게 귓속말 사용 가능
   - 보낸 귓속말은 보낸 User와 받은 User만 확인할 수 있음
   - 새로고침 or 재접속 후에도 귓속말 기록이 유지됨
-  - 귓속말은 namespace 단위로 관리됨(A namespace의 귓속말을 B namespace에서 확인할 수 없음)
+  - 귓속말은 namespace 단위로 관리됨 *(A namespace의 귓속말을 B namespace에서 확인할 수 없음)*
 
 ## 프로젝트 완수 시 얻는 것
  - `socket.io`, `JWT Login`, `multer`의 자유로운 응용
