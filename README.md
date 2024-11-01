@@ -8,6 +8,17 @@
 - BE: Node.js + Express + JavaScript
 - DB: SQLite3
 
+## 협업 및 안정적인 개발 환경 조성을 위한 `docker-compose.yml`활성화 방법
+해당 프로젝트는 2024.11.01 Docker 환경으로 이식되었습니다.
+```
+docker-compose up --build
+```
+입력 시 Docker 환경에서 구동이 가능합니다.
+```
+http://localhost:3001
+```
+위 주소를 통해 접근이 가능합니다.
+
 ## 사용법
 - 상단 버튼을 누르면 `namespace` 간 이동
   - 개인 스페이스는 현재 `개발`, `잡담`, `정보` 이렇게 3개로 분리되어 있음
@@ -33,6 +44,7 @@
 - sessionStorage를 통한 사용자 닉네임 구분(username 텍스트 기반) (2024.10.30)
 - whisper(namespace 단위로 구분되는 귓속말) (2024.10.30)
 - namespace (2024.10.30)
+- `Dockerfile`&& `docket-compose.yml`추가 (2024.11.01)
 
 ## 미완료된 목표(단기 목표)
 - 특정 User의 채팅을 누르면, 
