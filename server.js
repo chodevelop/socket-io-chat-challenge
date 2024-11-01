@@ -45,7 +45,7 @@ async function main() {
   app.use(express.static(join(__dirname, 'public')));
   const userSockets = new Map(); // username과 socket.id를 매핑
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3001;
 
   io.use((socket, next) => {
     const username = socket.handshake.auth.username;
