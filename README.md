@@ -47,7 +47,7 @@ http://localhost:3001
 - `Dockerfile`&& `docket-compose.yml`추가 (2024.11.01)
 
 ## 미완료된 목표(단기 목표)
-- 특정 User의 채팅을 누르면, 
+- 특정 User의 채팅을 누르면, `/dm {username} {message}` 템플릿이 채팅창에 뜨도록 만들기
 - 단톡방(room) 구현
 - 파일 전송 / 업로드 / 미리보기(multer)
 - JWT 기반 인증 처리(로그인)
