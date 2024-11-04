@@ -2,6 +2,7 @@
 
 ## 개요
 `socket.io`, `JWT Login`, `multer` 등 node.js의 핵심적인 응용 기능을 전부 사용할 수 있는 프로젝트입니다.
+20241104 추가 - `Docker`, `Docker-Compose`, `Kubernetes`를 적용하여 CI/CD를 연습할 수 있는 프로젝트로 전환하였습니다.
 
 ## 기술 스택
 - FE: HTML5 + CSS + JavaScript *(vanila)*
